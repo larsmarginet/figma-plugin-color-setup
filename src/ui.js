@@ -22,7 +22,7 @@ const messageListener = () => {
 
     switch (type) {
       case 'downlooad-file':
-        downloadFile('colors.scss', payload);
+        downloadFile('_colors.scss', payload);
         break;
     }
   };

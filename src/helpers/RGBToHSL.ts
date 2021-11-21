@@ -1,4 +1,4 @@
-const RGBToHSL = (r: number, g: number, b: number): string => {
+const RGBToHSL = (r: number, g: number, b: number) => {
   // Find greatest and smallest channel values
   const cmin = Math.min(r, g, b);
   const cmax = Math.max(r, g, b);
@@ -31,11 +31,8 @@ const RGBToHSL = (r: number, g: number, b: number): string => {
   s = +(s * 100).toFixed(1);
   l = +(l * 100).toFixed(1);
 
-  // h = (h * 100 + 0.5) | 0;
-  // s = (s * 100 + 0.5) | 0;
-  // l = (l * 100 + 0.5) | 0;
-
-  return 'hsl(' + h + ',' + s + '%,' + l + '%)';
+  // return 'hsl(' + Math.round(h) + ',' + Math.round(s) + '%,' + Math.round(l) + '%)';
+  return { h: Math.round(h), s: Math.round(s), l: Math.round(l) };
 };
 
 export default RGBToHSL;
