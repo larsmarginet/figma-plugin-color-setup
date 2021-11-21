@@ -1,11 +1,25 @@
+import RGBToHSL from './helpers/RGBToHSL';
+import RGBToHex from './helpers/RGBToHex';
+
 const generateFile = (payload: any): void => {
   postMessages({
     type: 'downlooad-file',
-    payload: [
-      { var: '--color-primary', value: '#ffffff' },
-      { var: '--color-secondary', value: '#000000' },
-    ],
+    payload: `:root {\r\n${convertPaintStyles(figma.getLocalPaintStyles())}}`,
   });
+};
+
+const convertPaintStyles = (styles: any) => {
+  let vars = '';
+
+  styles.forEach((style: any, index: number) => {
+    // TODO: check gradients, opcity, ...
+    const { r, g, b } = style.paints[0].color;
+    // TODO: hex in comment
+    // TODO: color names
+    vars += `--color-${index}-hsl: ${RGBToHSL(r, g, b)}; // ${RGBToHex(r, g, b)} \r\n`;
+  });
+
+  return vars;
 };
 
 // send messgages to ui.js

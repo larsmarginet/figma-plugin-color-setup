@@ -1,13 +1,8 @@
 import './ui.css';
 import { saveAs } from 'file-saver';
 
-const downloadFile = (payload) => {
-  let variables = '';
-  payload.map((item) => (variables += `${item.var}: ${item.value};`));
-
-  const content = `:root {${variables}}`;
-  const filename = 'colors.scss';
-  const blob = new Blob([content], {
+const downloadFile = (filename, payload) => {
+  const blob = new Blob([payload], {
     type: 'text/plain;charset=utf-8',
   });
 
@@ -27,7 +22,7 @@ const messageListener = () => {
 
     switch (type) {
       case 'downlooad-file':
-        downloadFile(payload);
+        downloadFile('colors.scss', payload);
         break;
     }
   };
